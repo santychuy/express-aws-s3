@@ -1,12 +1,12 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 
+import FilesRoutes from '@routes/files.routes';
+
 const app = express();
 
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles: true, tempFileDir: './uploads' }));
 
-app.get('/', (_req, res) => {
-  res.json({ message: 'Express AWS S3 example' });
-});
+app.use('/file', FilesRoutes);
 
 export default app;
